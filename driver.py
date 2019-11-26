@@ -1,9 +1,13 @@
-from Adafruit_IO import Client, RequestError, Feed
+import time
 
-from gardnr import constants, drivers
+from Adafruit_IO import Client, Feed RequestError, ThrottlingError
+
+from gardnr import constants, drivers, logger
 
 
 class AdafruitIO(drivers.Exporter):
+
+    THROTTLE_SLEEP_TIME = 60
 
     blacklist = [constants.IMAGE]
 
@@ -38,4 +42,10 @@ class AdafruitIO(drivers.Exporter):
         for log in logs:
             feed = self.get_feed(log.metric.name)
 
-            self.client.send_data(feed.key, log.value, {'created_at': log.timestamp.isoformat(), 'lat': '0', 'lon': '0', 'ele': '0'})
+            try:
+                self.client.send_data(feed.key, log.value, {'created_at': log.timestamp.isoformat(), 'lat': '0', 'lon': '0', 'ele': '0'})
+            except ThrottlingError:
+                logger.warning('Adafruit max requests reached, sleeping...')
+                time.sleep(self.THROTTLE_SLEEP_TIME)
+                logger.warning('Sleep done, attempting request again')
+                self.client.send_data(feed.key, log.value, {'created_at': log.timestamp.isoformat(), 'lat': '0', 'lon': '0', 'ele': '0'})
