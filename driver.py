@@ -38,4 +38,4 @@ class AdafruitIO(drivers.Exporter):
         for log in logs:
             feed = self.get_feed(log.metric.name)
 
-            self.client.send_data(feed.key, log.value, {'created_at': log.timestamp.isoformat()})
+            self.client.send_data(feed.key, log.value, {'created_at': log.timestamp.isoformat(), 'lat': '0', 'lon': '0'})
