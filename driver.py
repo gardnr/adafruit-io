@@ -1,6 +1,6 @@
 import time
 
-from Adafruit_IO import Client, Feed RequestError, ThrottlingError
+from Adafruit_IO import Client, Feed, RequestError, ThrottlingError
 
 from gardnr import constants, drivers, logger
 
