@@ -9,7 +9,7 @@ class AdafruitIO(drivers.Exporter):
 
     THROTTLE_SLEEP_TIME = 60
 
-    blacklist = [constants.IMAGE]
+    blacklist = [constants.IMAGE, constants.NOTES]
 
     username = 'IO_USER'
     key = 'IO_KEY'
