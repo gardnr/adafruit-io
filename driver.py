@@ -32,7 +32,10 @@ class AdafruitIO(drivers.Exporter):
 
     def export(self, logs):
 
+        # TODO: user send_batch_data instead
+        # https://github.com/adafruit/Adafruit_IO_Python/blob/869cf3547cbda48a3e51029419cf82cef4c5b8ad/Adafruit_IO/client.py#L158
+
         for log in logs:
             feed = self.get_feed(log.metric.name)
 
-            self.client.send_data(feed.key, log.value)
+            self.client.send_data(feed.key, log.value, {'created_at': log.timestamp.isoformat()})
