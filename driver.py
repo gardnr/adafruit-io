@@ -1,9 +1,11 @@
 from Adafruit_IO import Client, RequestError, Feed
 
-from gardnr import drivers, metrics
+from gardnr import constants, drivers
 
 
 class AdafruitIO(drivers.Exporter):
+
+    blacklist = [constants.IMAGE]
 
     username = 'IO_USER'
     key = 'IO_KEY'
