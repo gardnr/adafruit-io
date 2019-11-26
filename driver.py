@@ -17,7 +17,7 @@ class AdafruitIO(drivers.Exporter):
     def get_feed(self, metric_name):
 
         # make request for feed if it hasn't been retrieved yet
-        if log.metric.name not in self.feed_cache:
+        if metric_name not in self.feed_cache:
             try:
                 feed = self.client.feeds(metric_name)
             except RequestError: # Doesn't exist, create a new feed
