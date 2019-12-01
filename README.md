@@ -9,5 +9,5 @@ Feeds will be named after metric being logged. Feeds will be created automatical
 ```
 python3 -m pip install -r adafruit_io/requirements.txt
 
-gardnr add driver adafruit-io adafruit_io.driver:AdafruitIO -c username=IO_USER -c key=IO_KEY
+gardnr add driver adafruit-io adafruit_io.driver:AdafruitIO -c username=IO_USER key=IO_KEY
 ```
